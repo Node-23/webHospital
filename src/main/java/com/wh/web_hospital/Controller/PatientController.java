@@ -59,4 +59,16 @@ public class PatientController {
         return ResponseEntity.ok(patient);
     }
 
+    @DeleteMapping("/patients/delete/{id}")
+    public ResponseEntity<Void> removePatient(@PathVariable long id){
+
+        if(!patientRepository.existsById(id)){
+            return ResponseEntity.notFound().build();
+        }
+
+        patientRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+
+    }
+
 }
