@@ -2,7 +2,7 @@ package com.wh.web_hospital.Model;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class Consultation implements Serializable {
     @Column(nullable = false)
     private Patient patient;
     @Column(nullable = false)
-    private Date consultationDate;
+    private LocalDate consultationDate;
     @Column(nullable = false)
     private Time consultationTime;
     @Column(nullable = false)
@@ -36,7 +36,7 @@ public class Consultation implements Serializable {
     public Consultation() {
     }
 
-    public Consultation(long id, Doctor doctor, Patient patient, Date consultationDate, Time consultationTime, String consultationResume, float price) {
+    public Consultation(long id, Doctor doctor, Patient patient, LocalDate consultationDate, Time consultationTime, String consultationResume, float price) {
         this.id = id;
         this.doctor = doctor;
         this.patient = patient;
@@ -70,11 +70,11 @@ public class Consultation implements Serializable {
         this.patient = patient;
     }
 
-    public Date getConsultationDate() {
+    public LocalDate getConsultationDate() {
         return this.consultationDate;
     }
 
-    public void setConsultationDate(Date consultationDate) {
+    public void setConsultationDate(LocalDate consultationDate) {
         this.consultationDate = consultationDate;
     }
 
