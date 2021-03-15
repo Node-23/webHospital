@@ -1,7 +1,7 @@
 package com.wh.web_hospital.Model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class Patient implements Serializable {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private Date birthdate;
+    private LocalDate birthdate;
     @Column(nullable = false)
     private String phoneNumber;
     @Column(nullable = false)
@@ -34,7 +34,7 @@ public class Patient implements Serializable {
     public Patient() {
     }
 
-    public Patient(long id, String name, Date birthdate, String phoneNumber, String email, String address, String healthplan) {
+    public Patient(long id, String name, LocalDate birthdate, String phoneNumber, String email, String address, String healthplan) {
         this.id = id;
         this.name = name;
         this.birthdate = birthdate;
@@ -60,11 +60,11 @@ public class Patient implements Serializable {
         this.name = name;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return this.birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
