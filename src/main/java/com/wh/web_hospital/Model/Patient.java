@@ -1,5 +1,7 @@
 package com.wh.web_hospital.Model;
 
+import java.util.Date;
+
 public class Patient {
 
     private long id;
@@ -13,11 +15,11 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(long id, String name, Date birthdate, String phone, String email, String address, String healthplan) {
+    public Patient(long id, String name, Date birthdate, String phoneNumber, String email, String address, String healthplan) {
         this.id = id;
         this.name = name;
         this.birthdate = birthdate;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
         this.healthplan = healthplan;
@@ -47,12 +49,12 @@ public class Patient {
         this.birthdate = birthdate;
     }
 
-    public String getPhone() {
-        return this.phone;
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {

@@ -1,6 +1,7 @@
 package com.wh.web_hospital.Model;
 
 import java.sql.Time;
+import java.util.Date;
 
 public class Consultation {
  
