@@ -11,18 +11,20 @@ public class Consultation {
     private Date consultationDate;
     private Time consultationTime;
     private String consultationResume;
+    private float price;
     
 
     public Consultation() {
     }
 
-    public Consultation(long id, Doctor doctor, Patient patient, Date consultationDate, Time consultationTime, String consultationResume) {
+    public Consultation(long id, Doctor doctor, Patient patient, Date consultationDate, Time consultationTime, String consultationResume, float price) {
         this.id = id;
         this.doctor = doctor;
         this.patient = patient;
         this.consultationDate = consultationDate;
         this.consultationTime = consultationTime;
         this.consultationResume = consultationResume;
+        this.price = price;
     }
 
     public long getId() {
@@ -73,4 +75,12 @@ public class Consultation {
         this.consultationResume = consultationResume;
     }
 
+    public float getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+    
 }
