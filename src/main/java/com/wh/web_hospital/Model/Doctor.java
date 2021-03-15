@@ -1,12 +1,29 @@
 package com.wh.web_hospital.Model;
 
-public class Doctor {
+import java.io.Serializable;
 
-   private long id;
-   private String name;
-   private String phoneNumber;
-   private String email;
-   private String speciality;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Doctor implements Serializable {
+   
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private String phoneNumber;
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String speciality;
 
 
     public Doctor() {

@@ -1,16 +1,35 @@
 package com.wh.web_hospital.Model;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class Consultation {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Consultation implements Serializable {
  
+    
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(nullable = false)
     private Doctor doctor;
+    @Column(nullable = false)
     private Patient patient;
+    @Column(nullable = false)
     private Date consultationDate;
+    @Column(nullable = false)
     private Time consultationTime;
+    @Column(nullable = false)
     private String consultationResume;
+    @Column(nullable = false)
     private float price;
     
 
