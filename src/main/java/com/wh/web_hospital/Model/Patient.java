@@ -20,20 +20,26 @@ public class Patient implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     @NotBlank
     @Size(max = 60)
     private String name;
+
     private LocalDate birthdate;
+
     @NotBlank
     @Size(max = 12)
     private String phoneNumber;
+
     @NotBlank
     @Email
     @Size(max = 255)
     private String email;
+
     @NotBlank
     @Size(max = 300)
     private String address;
+    
     @NotBlank
     @Size(max = 100)
     private String healthplan;
