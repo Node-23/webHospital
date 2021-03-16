@@ -3,6 +3,8 @@ package com.wh.web_hospital.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import com.wh.web_hospital.Model.Patient;
 import com.wh.web_hospital.Repository.PatientRepository;
 
@@ -43,12 +45,12 @@ public class PatientController {
 
     @PostMapping("/patients/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public Patient newPatient(@RequestBody Patient patient){
+    public Patient newPatient(@Valid @RequestBody Patient patient){
         return patientRepository.save(patient);
     }
 
     @PutMapping("/patients/edit/{id}")
-    public ResponseEntity<Patient> editPatient(@PathVariable Long id,@RequestBody Patient patient){
+    public ResponseEntity<Patient> editPatient(@Valid @PathVariable Long id,@RequestBody Patient patient){
         if(!patientRepository.existsById(id)){
             return ResponseEntity.notFound().build();
         }

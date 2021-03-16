@@ -3,11 +3,13 @@ package com.wh.web_hospital.Model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Patient implements Serializable {
@@ -18,17 +20,22 @@ public class Patient implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 60)
     private String name;
-    @Column(nullable = false)
     private LocalDate birthdate;
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 12)
     private String phoneNumber;
-    @Column(nullable = false)
+    @NotBlank
+    @Email
+    @Size(max = 255)
     private String email;
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 300)
     private String address;
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 100)
     private String healthplan;
 
     public Patient() {
