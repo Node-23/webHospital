@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import com.wh.web_hospital.Model.Patient;
 import com.wh.web_hospital.Repository.PatientRepository;
+import com.wh.web_hospital.Service.Patient.PatientRegister;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class PatientController {
     
     @Autowired
-    PatientRepository patientRepository;
+    private PatientRepository patientRepository;
+
+    @Autowired
+    private PatientRegister patientRegister;
 
     @GetMapping("/patients")
     public List<Patient> getPatients(){
@@ -46,7 +50,7 @@ public class PatientController {
     @PostMapping("/patients/new")
     @ResponseStatus(HttpStatus.CREATED)
     public Patient newPatient(@Valid @RequestBody Patient patient){
-        return patientRepository.save(patient);
+        return patientRegister.register(patient);
     }
 
     @PutMapping("/patients/edit/{id}")
@@ -56,7 +60,7 @@ public class PatientController {
         }
 
         patient.setId(id);
-        patient = patientRepository.save(patient);
+        patient = patientRegister.register(patient);
 
         return ResponseEntity.ok(patient);
     }
@@ -68,7 +72,7 @@ public class PatientController {
             return ResponseEntity.notFound().build();
         }
 
-        patientRepository.deleteById(id);
+        patientRegister.delete(id);
         return ResponseEntity.noContent().build();
 
     }
