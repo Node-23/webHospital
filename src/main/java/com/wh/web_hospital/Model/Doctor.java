@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Doctor implements Serializable {
@@ -20,16 +21,20 @@ public class Doctor implements Serializable {
     private long id;
 
     @NotBlank
+    @Size(max = 60)
     private String name;
 
     @NotBlank
+    @Size(max = 12)
     private String phoneNumber;
 
     @NotBlank
     @Email
+    @Size(max = 255)
     private String email;
 
     @NotBlank
+    @Size(max = 60)
     private String speciality;
 
 
