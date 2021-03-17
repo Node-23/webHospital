@@ -25,7 +25,7 @@ public class Doctor implements Serializable {
     private String name;
 
     @NotBlank
-    @Size(max = 12)
+    @Size(max = 12, min = 9)
     private String phoneNumber;
 
     @NotBlank

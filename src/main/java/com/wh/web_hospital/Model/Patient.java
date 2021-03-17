@@ -29,7 +29,7 @@ public class Patient implements Serializable {
     private LocalDate birthdate;
 
     @NotBlank
-    @Size(max = 12)
+    @Size(max = 12, min = 9)
     private String phoneNumber;
 
     @NotBlank
