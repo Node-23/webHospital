@@ -3,12 +3,14 @@ package com.wh.web_hospital.Model;
 import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Consultation implements Serializable {
@@ -19,17 +21,23 @@ public class Consultation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(nullable = false)
+
+    @NotBlank
     private Doctor doctor;
-    @Column(nullable = false)
+
+    @NotBlank
     private Patient patient;
-    @Column(nullable = false)
+
+    @NotBlank
     private LocalDate consultationDate;
-    @Column(nullable = false)
+
+    @NotBlank
     private Time consultationTime;
-    @Column(nullable = false)
+
+    @NotBlank
     private String consultationResume;
-    @Column(nullable = false)
+
+    @NotBlank
     private float price;
     
 
@@ -100,6 +108,23 @@ public class Consultation implements Serializable {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Consultation)) {
+            return false;
+        }
+        Consultation consultation = (Consultation) o;
+        return id == consultation.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
     
 }

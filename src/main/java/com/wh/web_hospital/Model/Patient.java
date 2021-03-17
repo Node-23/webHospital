@@ -2,6 +2,7 @@ package com.wh.web_hospital.Model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -113,6 +114,22 @@ public class Patient implements Serializable {
         this.healthplan = healthplan;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Patient)) {
+            return false;
+        }
+        Patient patient = (Patient) o;
+        return id == patient.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
     
 }
