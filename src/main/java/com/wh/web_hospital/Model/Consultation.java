@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Consultation implements Serializable {
@@ -24,11 +23,9 @@ public class Consultation implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank
     @ManyToOne
     private Doctor doctor;
 
-    @NotBlank
     @ManyToOne
     private Patient patient;
     
@@ -36,19 +33,15 @@ public class Consultation implements Serializable {
 
     private LocalDate consultationDate;
 
-    @NotBlank
     private Time consultationStartedTime;
 
-    @NotBlank
     private Time consultationFinishedTime;
 
-    @NotBlank
     private String consultationResume;
 
-    @NotBlank
     private float price;
 
-    @NotBlank
+    
     @Enumerated(EnumType.STRING)
     private ConsultationStatus status;
     
