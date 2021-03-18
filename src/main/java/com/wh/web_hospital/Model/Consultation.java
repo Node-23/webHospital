@@ -31,11 +31,16 @@ public class Consultation implements Serializable {
     @NotBlank
     @ManyToOne
     private Patient patient;
+    
+    private LocalDate consultationDateScheduled;
 
     private LocalDate consultationDate;
 
     @NotBlank
-    private Time consultationTime;
+    private Time consultationStartedTime;
+
+    @NotBlank
+    private Time consultationFinishedTime;
 
     @NotBlank
     private String consultationResume;
@@ -51,12 +56,14 @@ public class Consultation implements Serializable {
     public Consultation() {
     }
 
-    public Consultation(long id, Doctor doctor, Patient patient, LocalDate consultationDate, Time consultationTime, String consultationResume, float price, ConsultationStatus status) {
+    public Consultation(long id, Doctor doctor, Patient patient,LocalDate consultationDateScheduled, LocalDate consultationDate, Time consultationStartedTime, Time consultationFinishedTime, String consultationResume, float price, ConsultationStatus status) {
         this.id = id;
         this.doctor = doctor;
         this.patient = patient;
+        this.consultationDateScheduled = consultationDateScheduled;
         this.consultationDate = consultationDate;
-        this.consultationTime = consultationTime;
+        this.consultationStartedTime = consultationStartedTime;
+        this.consultationFinishedTime = consultationFinishedTime;
         this.consultationResume = consultationResume;
         this.price = price;
         this.status = status;
@@ -86,6 +93,14 @@ public class Consultation implements Serializable {
         this.patient = patient;
     }
 
+    public LocalDate getConsultationDateScheduled() {
+        return this.consultationDateScheduled;
+    }
+
+    public void setConsultationDateScheduled(LocalDate consultationDateScheduled) {
+        this.consultationDateScheduled = consultationDateScheduled;
+    }
+
     public LocalDate getConsultationDate() {
         return this.consultationDate;
     }
@@ -94,12 +109,20 @@ public class Consultation implements Serializable {
         this.consultationDate = consultationDate;
     }
 
-    public Time getConsultationTime() {
-        return this.consultationTime;
+    public Time getConsultationStartedTime() {
+        return this.consultationStartedTime;
     }
 
-    public void setConsultationTime(Time consultationTime) {
-        this.consultationTime = consultationTime;
+    public void setConsultationStartedTime(Time consultationStartedTime) {
+        this.consultationStartedTime = consultationStartedTime;
+    }
+
+    public Time getConsultationFinishedTime() {
+        return this.consultationFinishedTime;
+    }
+
+    public void setConsultationFinishedTime(Time consultationFinishedTime) {
+        this.consultationFinishedTime = consultationFinishedTime;
     }
 
     public String getConsultationResume() {
