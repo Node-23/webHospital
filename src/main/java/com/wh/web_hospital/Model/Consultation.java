@@ -6,9 +6,12 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -22,12 +25,13 @@ public class Consultation implements Serializable {
     private long id;
 
     @NotBlank
+    @ManyToOne
     private Doctor doctor;
 
     @NotBlank
+    @ManyToOne
     private Patient patient;
 
-    @NotBlank
     private LocalDate consultationDate;
 
     @NotBlank
@@ -38,12 +42,16 @@ public class Consultation implements Serializable {
 
     @NotBlank
     private float price;
+
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    private ConsultationStatus status;
     
 
     public Consultation() {
     }
 
-    public Consultation(long id, Doctor doctor, Patient patient, LocalDate consultationDate, Time consultationTime, String consultationResume, float price) {
+    public Consultation(long id, Doctor doctor, Patient patient, LocalDate consultationDate, Time consultationTime, String consultationResume, float price, ConsultationStatus status) {
         this.id = id;
         this.doctor = doctor;
         this.patient = patient;
@@ -51,6 +59,7 @@ public class Consultation implements Serializable {
         this.consultationTime = consultationTime;
         this.consultationResume = consultationResume;
         this.price = price;
+        this.status = status;
     }
 
     public long getId() {
@@ -109,6 +118,14 @@ public class Consultation implements Serializable {
         this.price = price;
     }
 
+
+    public ConsultationStatus getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(ConsultationStatus status) {
+        this.status = status;
+    }
 
     @Override
     public boolean equals(Object o) {
