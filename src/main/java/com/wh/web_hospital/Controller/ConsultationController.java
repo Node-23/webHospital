@@ -1,12 +1,19 @@
 package com.wh.web_hospital.Controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import com.wh.web_hospital.Model.Consultation;
+import com.wh.web_hospital.Repository.ConsultationRepository;
 import com.wh.web_hospital.Service.Consultation.ConsultationRegister;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +27,35 @@ public class ConsultationController {
     @Autowired
     private ConsultationRegister consultationRegister;
 
+    @Autowired
+    private ConsultationRepository consultationRepository;
+
+    /*TODO methods: 
+        1- Start consultation
+        2- Finish consultation 
+        3- consultationDate must be after today
+    */
 
     @PostMapping("/consultation/new")
     @ResponseStatus(HttpStatus.CREATED)
     public Consultation create(@Valid @RequestBody Consultation consultation){
         return consultationRegister.create(consultation);
+    }
+
+    @GetMapping("/consultation")
+    public List<Consultation> getConsultations(){
+        return consultationRepository.findAll();
+    }
+
+    @GetMapping("/consultation/{id}")
+    public ResponseEntity<Consultation> getConsultation(@PathVariable Long id){
+        Optional<Consultation> consultation =  consultationRepository.findById(id);
+
+        if(consultation.isPresent()){
+            return ResponseEntity.ok(consultation.get());
+        }
+        
+        return ResponseEntity.notFound().build();
     }
 
 }
