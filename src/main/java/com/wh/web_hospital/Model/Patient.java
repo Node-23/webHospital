@@ -10,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.wh.web_hospital.Domain.ValidationGroups;
 
 @Entity
 public class Patient implements Serializable {
@@ -20,6 +23,7 @@ public class Patient implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = ValidationGroups.PatientId.class)
     private long id;
 
     @NotBlank
@@ -129,6 +133,10 @@ public class Patient implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public boolean isPresent() {
+        return false;
     }
 
     

@@ -12,6 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.wh.web_hospital.Domain.ValidationGroups;
 
 @Entity
 public class Consultation implements Serializable {
@@ -23,26 +31,36 @@ public class Consultation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Valid
+    @ConvertGroup(from = Default.class ,to = ValidationGroups.DoctorId.class)
     @ManyToOne
+    @NotNull
     private Doctor doctor;
 
+    @Valid
+    @ConvertGroup(from = Default.class ,to = ValidationGroups.PatientId.class)
     @ManyToOne
+    @NotNull
     private Patient patient;
     
     private LocalDate consultationDateScheduled;
-
+    
+    @NotNull
     private LocalDate consultationDate;
 
+    @JsonProperty(access = Access.READ_ONLY)
     private Time consultationStartedTime;
 
+    @JsonProperty(access = Access.READ_ONLY)
     private Time consultationFinishedTime;
 
     private String consultationResume;
 
+    @NotNull
     private float price;
 
-    
     @Enumerated(EnumType.STRING)
+    @JsonProperty(access = Access.READ_ONLY)
     private ConsultationStatus status;
     
 

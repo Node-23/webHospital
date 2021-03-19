@@ -1,5 +1,7 @@
 package com.wh.web_hospital.Controller;
 
+import javax.validation.Valid;
+
 import com.wh.web_hospital.Model.Consultation;
 import com.wh.web_hospital.Service.Consultation.ConsultationRegister;
 
@@ -21,7 +23,7 @@ public class ConsultationController {
 
     @PostMapping("/consultation/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public Consultation create(@RequestBody Consultation consultation){
+    public Consultation create(@Valid @RequestBody Consultation consultation){
         return consultationRegister.create(consultation);
     }
 

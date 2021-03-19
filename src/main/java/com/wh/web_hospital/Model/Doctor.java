@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.wh.web_hospital.Domain.ValidationGroups;
 
 @Entity
 public class Doctor implements Serializable {
@@ -18,6 +21,7 @@ public class Doctor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = ValidationGroups.DoctorId.class)
     private long id;
 
     @NotBlank
