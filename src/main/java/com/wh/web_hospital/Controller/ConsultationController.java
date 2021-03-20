@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -56,6 +57,18 @@ public class ConsultationController {
         }
         
         return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/consultation/{id}/start")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void startConsultation(@PathVariable Long id){
+        consultationRegister.startConsultation(id);
+    }
+
+    @PutMapping("/consultation/{id}/finish")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finishConsultation(@PathVariable Long id){
+        consultationRegister.finishConsultation(id);
     }
 
 }

@@ -1,8 +1,8 @@
 package com.wh.web_hospital.Model;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.time.LocalDate;
+import java.time.OffsetTime;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -20,6 +20,7 @@ import javax.validation.groups.Default;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.wh.web_hospital.Domain.ValidationGroups;
+import com.wh.web_hospital.Exceptions.ServicesExceptions;
 
 @Entity
 public class Consultation implements Serializable {
@@ -49,10 +50,10 @@ public class Consultation implements Serializable {
     private LocalDate consultationDate;
 
     @JsonProperty(access = Access.READ_ONLY)
-    private Time consultationStartedTime;
+    private OffsetTime consultationStartedTime;
 
     @JsonProperty(access = Access.READ_ONLY)
-    private Time consultationFinishedTime;
+    private OffsetTime consultationFinishedTime;
 
     private String consultationResume;
 
@@ -67,7 +68,7 @@ public class Consultation implements Serializable {
     public Consultation() {
     }
 
-    public Consultation(long id, Doctor doctor, Patient patient,LocalDate consultationDateScheduled, LocalDate consultationDate, Time consultationStartedTime, Time consultationFinishedTime, String consultationResume, float price, ConsultationStatus status) {
+    public Consultation(long id, Doctor doctor, Patient patient,LocalDate consultationDateScheduled, LocalDate consultationDate, OffsetTime consultationStartedTime, OffsetTime consultationFinishedTime, String consultationResume, float price, ConsultationStatus status) {
         this.id = id;
         this.doctor = doctor;
         this.patient = patient;
@@ -120,19 +121,19 @@ public class Consultation implements Serializable {
         this.consultationDate = consultationDate;
     }
 
-    public Time getConsultationStartedTime() {
+    public OffsetTime getConsultationStartedTime() {
         return this.consultationStartedTime;
     }
 
-    public void setConsultationStartedTime(Time consultationStartedTime) {
+    public void setConsultationStartedTime(OffsetTime consultationStartedTime) {
         this.consultationStartedTime = consultationStartedTime;
     }
 
-    public Time getConsultationFinishedTime() {
+    public OffsetTime getConsultationFinishedTime() {
         return this.consultationFinishedTime;
     }
 
-    public void setConsultationFinishedTime(Time consultationFinishedTime) {
+    public void setConsultationFinishedTime(OffsetTime consultationFinishedTime) {
         this.consultationFinishedTime = consultationFinishedTime;
     }
 
@@ -175,6 +176,24 @@ public class Consultation implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public void finishConsultation() {
+        if(!ConsultationStatus.STARTED.equals(getStatus())){
+            throw new ServicesExceptions("Cannot finish an unstarted consultation");
+        }
+
+        setStatus(ConsultationStatus.FINISHED);
+        setConsultationFinishedTime(OffsetTime.now());
+    }
+
+    public void startConsultation() {
+        if(!ConsultationStatus.SCHEDULED.equals(getStatus())){
+            throw new ServicesExceptions("Cannot start an unscheduled consultation");
+        }
+
+        setStatus(ConsultationStatus.STARTED);
+        setConsultationStartedTime(OffsetTime.now());
     }
     
 }

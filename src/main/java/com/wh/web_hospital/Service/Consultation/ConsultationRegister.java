@@ -41,4 +41,21 @@ public class ConsultationRegister {
         return consultationRepository.save(consultation);
     }
 
+    public void startConsultation(Long id){
+        Consultation consultation = consultationRepository.findById(id)
+        .orElseThrow(() -> new ServicesExceptions("Consultation not found!"));
+
+        consultation.startConsultation();
+        consultationRepository.save(consultation);
+    }
+
+    public void finishConsultation(Long id){
+        Consultation consultation = consultationRepository.findById(id)
+        .orElseThrow(() -> new ServicesExceptions("Consultation not found!"));
+
+        consultation.finishConsultation();
+        consultationRepository.save(consultation);
+    }
+
+
 }
