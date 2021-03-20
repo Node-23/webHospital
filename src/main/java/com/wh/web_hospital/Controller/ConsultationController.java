@@ -34,7 +34,9 @@ public class ConsultationController {
     /*TODO methods: 
         1- Start consultation (Done)
         2- Finish consultation (Done)
-        3- consultationDate must be after today
+        3- consultationDate must be after today (Done)
+        4- When finish consultation pass the consultation resume (Done)
+        5- Search pacient/doctor that contains xxx
     */
 
     @PostMapping("/consultation/new")
@@ -65,10 +67,16 @@ public class ConsultationController {
         consultationRegister.startConsultation(id);
     }
 
+    @PutMapping("/consultation/{id}/cancel")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void cacenlConsultation(@PathVariable Long id){
+        consultationRegister.cancelConsultation(id);
+    }
+
     @PutMapping("/consultation/{id}/finish")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void finishConsultation(@PathVariable Long id){
-        consultationRegister.finishConsultation(id);
+    public void finishConsultation(@PathVariable Long id, @RequestBody String resume){
+        consultationRegister.finishConsultation(id,resume);
     }
 
 }

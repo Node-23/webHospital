@@ -178,15 +178,6 @@ public class Consultation implements Serializable {
         return Objects.hashCode(id);
     }
 
-    public void finishConsultation() {
-        if(!ConsultationStatus.STARTED.equals(getStatus())){
-            throw new ServicesExceptions("Cannot finish an unstarted consultation");
-        }
-
-        setStatus(ConsultationStatus.FINISHED);
-        setConsultationFinishedTime(OffsetTime.now());
-    }
-
     public void startConsultation() {
         if(!ConsultationStatus.SCHEDULED.equals(getStatus())){
             throw new ServicesExceptions("Cannot start an unscheduled consultation");
@@ -194,6 +185,23 @@ public class Consultation implements Serializable {
 
         setStatus(ConsultationStatus.STARTED);
         setConsultationStartedTime(OffsetTime.now());
+    }
+
+    public void cancelConsultation() {
+        if(ConsultationStatus.CANCELED.equals(getStatus())){
+            throw new ServicesExceptions("Consultation already canceled");
+        }
+
+        setStatus(ConsultationStatus.CANCELED);
+    }
+
+    public void finishConsultation() {
+        if(!ConsultationStatus.STARTED.equals(getStatus())){
+            throw new ServicesExceptions("Cannot finish an unstarted consultation");
+        }
+
+        setStatus(ConsultationStatus.FINISHED);
+        setConsultationFinishedTime(OffsetTime.now());
     }
     
 }

@@ -53,13 +53,21 @@ public class ConsultationRegister {
         consultationRepository.save(consultation);
     }
 
-    public void finishConsultation(Long id){
+    public void cancelConsultation(Long id){
         Consultation consultation = consultationRepository.findById(id)
         .orElseThrow(() -> new ServicesExceptions("Consultation not found!"));
 
-        consultation.finishConsultation();
+        consultation.cancelConsultation();
         consultationRepository.save(consultation);
     }
 
+    public void finishConsultation(Long id, String resume){
+        Consultation consultation = consultationRepository.findById(id)
+        .orElseThrow(() -> new ServicesExceptions("Consultation not found!"));
+
+        consultation.setConsultationResume(resume);
+        consultation.finishConsultation();
+        consultationRepository.save(consultation);
+    }
 
 }
