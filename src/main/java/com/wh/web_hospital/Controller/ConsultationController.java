@@ -32,8 +32,8 @@ public class ConsultationController {
     private ConsultationRepository consultationRepository;
 
     /*TODO methods: 
-        1- Start consultation
-        2- Finish consultation 
+        1- Start consultation (Done)
+        2- Finish consultation (Done)
         3- consultationDate must be after today
     */
 

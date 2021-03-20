@@ -33,6 +33,10 @@ public class ConsultationRegister {
         Patient patient = patientRepository.findById(consultation.getPatient().getId())
         .orElseThrow(() -> new ServicesExceptions("Patient not found!"));
 
+        if(consultation.getConsultationDate().compareTo(LocalDate.now()) < 0){
+            throw new ServicesExceptions("The consultation date must be after today");
+        }
+
         consultation.setDoctor(doctor);
         consultation.setPatient(patient);
         consultation.setStatus(ConsultationStatus.SCHEDULED);
