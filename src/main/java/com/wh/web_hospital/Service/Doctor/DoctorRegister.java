@@ -15,13 +15,18 @@ public class DoctorRegister {
     private DoctorRepository doctorRepository;
 
     public Doctor register(Doctor doctor){
-        Doctor searchedDoctor = doctorRepository.findByEmail(doctor.getEmail());
+        Doctor emailDoctor = doctorRepository.findByEmail(doctor.getEmail());
         
-        if(searchedDoctor != null && !searchedDoctor.equals(doctor)){
+        if(emailDoctor != null && !emailDoctor.equals(doctor)){
             throw new ServicesExceptions("This email is already in use!");
         }
 
-        if(CpfValidation.cpfVerification(doctor.getCpf()) == false){
+        Doctor cpfDoctor = doctorRepository.findByCpf(doctor.getCpf());
+        if(cpfDoctor != null && !cpfDoctor.equals(doctor)){
+            throw new ServicesExceptions("This cpf is already in use!");
+        }
+
+        if(CpfValidation.validation(doctor.getCpf()) == false){
             throw new ServicesExceptions("This CPF is invalid!");
         }
 

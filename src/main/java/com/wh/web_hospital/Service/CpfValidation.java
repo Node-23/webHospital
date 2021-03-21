@@ -2,7 +2,7 @@ package com.wh.web_hospital.Service;
 
 public class CpfValidation {
 
-    public static boolean cpfVerification(String cpf) {
+    public static boolean validation(String cpf) {
 
         if (cpfSameNumbers(cpf) == true) {
             return false;
