@@ -37,6 +37,11 @@ public class PatientController {
         return patientRepository.findAll();
     }
 
+    @GetMapping("/patients/contains")
+    public List<Patient> getPatientsContains(@RequestBody String name){
+        return patientRepository.findByNameContainingIgnoreCase(name);
+    }
+
     @GetMapping("/patients/{id}")
     public ResponseEntity<Patient> getPatient(@PathVariable(value = "id") long id){
         Optional<Patient> patient = patientRepository.findById(id);

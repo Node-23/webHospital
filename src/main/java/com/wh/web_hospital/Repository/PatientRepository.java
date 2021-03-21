@@ -1,5 +1,6 @@
 package com.wh.web_hospital.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.wh.web_hospital.Model.Patient;
@@ -12,4 +13,5 @@ public interface PatientRepository extends JpaRepository<Patient, Long>{
     
     Optional<Patient> findById(long id);
     Patient findByEmail(String email);
+    List<Patient> findByNameContainingIgnoreCase(String name);
 }
