@@ -41,16 +41,25 @@ public class Doctor implements Serializable {
     @Size(max = 60)
     private String speciality;
 
+    @NotBlank
+    @Size(max = 15)
+    private String crm;
+
+    @NotBlank
+    @Size(max = 11, min =11)
+    private String cpf;
 
     public Doctor() {
     }
 
-    public Doctor(long id, String name, String phoneNumber, String email, String speciality) {
+    public Doctor(long id, String name, String phoneNumber, String email, String speciality, String crm, String cpf) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.speciality = speciality;
+        this.crm = crm;
+        this.cpf = cpf;
     }
 
     public long getId() {
@@ -93,6 +102,21 @@ public class Doctor implements Serializable {
         this.speciality = speciality;
     }
 
+    public String getCrm() {
+        return this.crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
     @Override
     public boolean equals(Object o) {

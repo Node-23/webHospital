@@ -3,6 +3,7 @@ package com.wh.web_hospital.Service.Doctor;
 import com.wh.web_hospital.Exceptions.ServicesExceptions;
 import com.wh.web_hospital.Model.Doctor;
 import com.wh.web_hospital.Repository.DoctorRepository;
+import com.wh.web_hospital.Service.CpfValidation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,16 @@ public class DoctorRegister {
             throw new ServicesExceptions("This email is already in use!");
         }
 
+        if(CpfValidation.cpfVerification(doctor.getCpf()) == false){
+            throw new ServicesExceptions("This CPF is invalid!");
+        }
+
         return doctorRepository.save(doctor);
 
     }
-
+    
     public void delete(Long id){
         doctorRepository.deleteById(id);
     }
-
+    
 }
