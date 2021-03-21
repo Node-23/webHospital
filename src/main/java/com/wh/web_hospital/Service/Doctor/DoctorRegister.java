@@ -31,7 +31,6 @@ public class DoctorRegister {
         }
 
         return doctorRepository.save(doctor);
-
     }
     
     public void delete(Long id){

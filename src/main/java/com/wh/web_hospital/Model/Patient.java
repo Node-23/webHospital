@@ -49,10 +49,14 @@ public class Patient implements Serializable {
     @Size(max = 100)
     private String healthplan;
 
+    @NotBlank
+    @Size(max = 11, min =11)
+    private String cpf;
+
     public Patient() {
     }
 
-    public Patient(long id, String name, LocalDate birthdate, String phoneNumber, String email, String address, String healthplan) {
+    public Patient(long id, String name, LocalDate birthdate, String phoneNumber, String email, String address, String healthplan, String cpf) {
         this.id = id;
         this.name = name;
         this.birthdate = birthdate;
@@ -60,6 +64,7 @@ public class Patient implements Serializable {
         this.email = email;
         this.address = address;
         this.healthplan = healthplan;
+        this.cpf = cpf;
     }
 
     public long getId() {
@@ -118,6 +123,13 @@ public class Patient implements Serializable {
         this.healthplan = healthplan;
     }
 
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
     @Override
     public boolean equals(Object o) {
